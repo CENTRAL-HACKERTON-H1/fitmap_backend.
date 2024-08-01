@@ -1,3 +1,5 @@
+# community/community/settings.py 
+
 """
 Django settings for community project.
 
@@ -58,12 +60,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # simple-jwt 관련
     'rest_framework_simplejwt',
-    'corsheaders',  # CORS 관련 앱 추가
+    'corsheaders',
 ]
 
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # CORS 미들웨어 추가
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -78,34 +80,9 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://127.0.0.1:8000",
     "http://localhost:5173",
-    "http://fitmap.store"
-]
+    "http://fitmap.store"]
 
 CORS_ALLOW_CREDENTIALS = True
-
-# CORS 관련 추가 설정
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
-CORS_EXPOSE_HEADERS = ['Content-Disposition']
 
 ROOT_URLCONF = "community.urls"
 
