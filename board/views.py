@@ -210,8 +210,8 @@ class FacilityList(View):
         
         return JsonResponse({'status': 'success'})
     
-class FacilityListView(APIView):
-    def get(self, request, *args, **kwargs):
-        facilities = Facility.objects.all()
-        serializer = FacilitySerializer(facilities, many=True)
-        return Response(serializer.data)
+class FacilityListView(generics.ListAPIView):
+    queryset = Facility.objects.all()
+    serializer_class = FacilitySerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = FacilityFilter
