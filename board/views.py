@@ -14,6 +14,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 import json
 from django.http import JsonResponse
 from django.views import View
+from rest_framework.views import APIView
 
 class PostListView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
@@ -208,3 +209,9 @@ class FacilityList(View):
                 print(serializer.errors)
         
         return JsonResponse({'status': 'success'})
+    
+class FacilityListView(APIView):
+    def get(self, request, *args, **kwargs):
+        facilities = Facility.objects.all()
+        serializer = FacilitySerializer(facilities, many=True)
+        return Response(serializer.data)
