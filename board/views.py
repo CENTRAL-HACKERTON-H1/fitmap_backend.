@@ -11,6 +11,9 @@ from .models import Facility
 from .serializers import FacilitySerializer
 from .filters import FacilityFilter
 from django_filters.rest_framework import DjangoFilterBackend
+import json
+from django.http import JsonResponse
+from django.views import View
 
 class PostListView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
@@ -170,8 +173,38 @@ class CommentDetailView(generics.RetrieveDestroyAPIView):
         }
         return Response(response_data, status=status.HTTP_200_OK)
 
-class FacilityListView(generics.ListAPIView):
-    queryset = Facility.objects.all()
-    serializer_class = FacilitySerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = FacilityFilter
+# class FacilityListView(generics.ListAPIView):
+#     queryset = Facility.objects.all()
+#     serializer_class = FacilitySerializer
+#     filter_backends = [DjangoFilterBackend]
+#     filterset_class = FacilityFilter
+
+class FacilityList(View):
+    def get(self, request, *args, **kwargs):
+        # JSON 파일 경로 지정
+        file_path = '/Users/oesikgogi/Desktop/data.json'
+
+        # JSON 파일 읽기
+        with open(file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+
+        # JSON 데이터를 데이터베이스에 저장
+        for item in data:
+            serializer = FacilitySerializer(data={
+                'name': item['시설명'],
+                'region': item['지역'],
+                'location': item['위치'],
+                'sport': item['종목'],
+                'target': item['대상'],
+                'period': item['기간'],
+                'day': item['요일'],
+                'time': item['진행시간(1회)'],
+                'fee': item['수강료(원)'],
+                'capacity': item['전체정원수']
+            })
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                print(serializer.errors)
+        
+        return JsonResponse({'status': 'success'})

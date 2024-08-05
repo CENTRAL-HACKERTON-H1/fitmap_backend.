@@ -1,12 +1,12 @@
 # community/board/urls.py
 
 from django.urls import path
-from .views import PostListView, PostDetailView, CommentListView, CommentDetailView, FacilityListView
+from .views import PostListView, PostDetailView, CommentListView, CommentDetailView, FacilityList
 
 app_name = 'board'
 
 urlpatterns = [
-    path('facilities/', FacilityListView.as_view(), name='facility_list'),
+    path('facilities/', FacilityList.as_view(), name='facility_list'),
     path('', PostListView.as_view(), name='post_list'),
     path('<int:pk>/', PostDetailView.as_view(), name='post_detail'),
     path('<int:post_id>/comment/', CommentListView.as_view(), name='comment_list'),
