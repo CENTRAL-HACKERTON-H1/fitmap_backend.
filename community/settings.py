@@ -80,6 +80,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://127.0.0.1:8000",
     "http://localhost:5173",
+    "http://localhost:5174",
     "https://fitmap.store",
     "https://main--fitmapstore.netlify.app"
     ]
@@ -212,6 +213,12 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 30,
 }
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ),
+# }
 
 ACCOUNT_EMAIL_VERIFICATION = 'none' # 이 부분
 ACCOUNT_EMAIL_REQUIRED = False # 이 부분
