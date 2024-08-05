@@ -81,7 +81,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:8000",
     "http://localhost:5173",
     "https://fitmap.store",
-    "https://main--fitmapstore.netlify.app/"
+    "https://main--fitmapstore.netlify.app"
     ]
 
 CORS_ALLOW_CREDENTIALS = True
